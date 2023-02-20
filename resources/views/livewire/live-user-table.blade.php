@@ -13,6 +13,9 @@
                         <input type="text"
                             class="form-input w-full text-gray-500 ml-6 border border-gray-300 rounded-lg w-20"
                             wire:model="search" placeholder="Ingrese el termino de busqueda..">
+                            <button wire:click="clear" class="ml-6">
+                                <span class="fa fa-eraser"></span>
+                            </button>
                     </div>
                 </div>
 
@@ -22,12 +25,21 @@
 
                             <th scope="col" class="px-6 py-3">
                                 ID
+                                <button wire:click="sortable('id')">
+                                    <span class="fa fa{{$camp === 'id' ? $icon: '-circle'}}"></span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 NOMBRE
+                                <button wire:click="sortable('name')">
+                                    <span class="fa fa{{$camp === 'name' ? $icon: '-circle'}}"></span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 EMAIL
+                                <button wire:click="sortable('email')">
+                                    <span class="fa fa{{$camp === 'email' ? $icon: '-circle'}}"></span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 ROL

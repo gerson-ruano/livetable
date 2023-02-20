@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-
+use App\Models\Apellido;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
@@ -16,6 +16,7 @@ class LiveUserTable extends Component
     public $camp = null;
     public $order = null;
     public $icon = '-circle';
+    public $user_role = '';
     protected $queryString =[
         'search' => ['except' => ''],
         'camp' => ['except' => null],
@@ -24,12 +25,17 @@ class LiveUserTable extends Component
 
     public function render()
     {
-        $users = User::where('name', 'like', "%{$this->search}%")
-            ->orWhere('email', 'like', "%{$this->search}%");
+        $users = User::termino($this->search)
+        ->role($this->user_role);
 
         if($this->camp && $this->order){
+            if($this->camp === 'lastname'){
+                $users = $users->orderBy(Apellido::select('lastname')
+                ->whereColumn('apellidos.user_id', 'users.id'), $this->order);
+            }else{
+                $users = $users->orderBy($this->camp, $this->order);
+            }
 
-            $users = $users->orderBy($this->camp, $this->order);
         }else {
             $this->camp = null;
             $this->order = null;

@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -58,4 +59,38 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function getRolAttribute():string
+    {
+        if($this->role =='admin'){
+            return 'Administrador';
+        }
+        return $this->role == 'seller' ? 'Vendedor' : 'Cliente';
+    }
+
+    public function r_lastname()
+    {
+        return $this->hasOne(Apellido::class, 'user_id', 'id');
+    }
+
+    public function scopeTermino($query, $termino)
+    {
+        if($termino === ''){
+            return;
+        }
+        return $query->where('name', 'like', "%{$termino}%")
+            ->orWhere('email', 'like', "%{$termino}%")
+            ->orWhereHas('r_lastname', function($query2) use ($termino){
+                $query2->where('lastname', 'like', "%{$termino}%");
+            });
+    }
+
+    public function scopeRole($query, $role)
+    {
+        if($role === ''){
+            return;
+        }
+        return $query->whereRole($role);
+
+    }
 }

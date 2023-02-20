@@ -13,6 +13,13 @@
                         <input type="text"
                             class="form-input w-full text-gray-500 ml-6 border border-gray-300 rounded-lg w-20"
                             wire:model="search" placeholder="Ingrese el termino de busqueda..">
+                            <select wire:model="user_role" class="border border-gray-300 rounded-lg w-40">
+                                <option value="">Seleccione</option>
+                                <option value="admin">Administrador</option>
+                                <option value="seller">Vendedor</option>
+                                <option value="client">Cliente</option>
+
+                            </select>
                             <button wire:click="clear" class="ml-6">
                                 <span class="fa fa-eraser"></span>
                             </button>
@@ -33,6 +40,12 @@
                                 NOMBRE
                                 <button wire:click="sortable('name')">
                                     <span class="fa fa{{$camp === 'name' ? $icon: '-circle'}}"></span>
+                                </button>
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                APELLIDO
+                                <button wire:click="sortable('lastname')">
+                                    <span class="fa fa{{$camp === 'lastname' ? $icon: '-circle'}}"></span>
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -66,6 +79,9 @@
                                     {{ $user->name }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    {{ $user->r_lastname->lastname }}
+                                </td>
+                                <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
                                         {{ $user->email }}
@@ -73,7 +89,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="pl-3">
-                                        <div class="text-base font-semibold">Admin</div>
+                                        <div class="text-base font-semibold">{{$user->rol}}</div>
                                         {{-- <div class="font-normal text-gray-500">neil.sims@flowbite.com</div> --}}
                                     </div>
                                 </td>

@@ -94,8 +94,10 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="#"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="javascript:void(0)"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        wire:click="showModal({{$user->id}})"
+                                        >Edit</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -107,5 +109,7 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
+

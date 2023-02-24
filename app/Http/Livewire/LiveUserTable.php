@@ -25,6 +25,10 @@ class LiveUserTable extends Component
         'order' => ['except' => null],
     ];
 
+    protected $listeners = [
+        'userListUpdate' => 'render'
+    ];
+
     public function render()
     {
         $users = User::termino($this->search)

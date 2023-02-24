@@ -15,7 +15,7 @@ class ComponentInput extends Component
      *
      * @return void
      */
-    public function __construct(string $label, string $placeholder, string $name, string $type = null) // = 'text'
+    public function __construct(string $label, string $placeholder, string $name, string $type = 'text') // = 'text'
     {
         $this->label = $label;
         $this->placeholder = $placeholder;

@@ -27,6 +27,7 @@ class RequestUpdateUser extends FormRequest
             'name' => 'required|min:3|max:30',
             'lastname' => 'required|min:3|max:30',
             'email' => 'email|required',
+            'role' => 'required|in:client,seller,admin',
         ];
     }
 

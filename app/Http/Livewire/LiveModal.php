@@ -14,6 +14,7 @@ class LiveModal extends Component
     public $lastname = '';
     public $email = '';
     public $role = '';
+    public $user = null;
 
     protected $listeners  = [
         'showModal' => 'sacarModal'
@@ -26,6 +27,7 @@ class LiveModal extends Component
 
     public function sacarModal(User $user)
     {
+        $this->user = $user;
         $this->name = $user->name;
         $this->lastname = $user->r_lastname->lastname;
         $this->email = $user->email;
@@ -42,8 +44,22 @@ class LiveModal extends Component
     public function actualizarUsuario()
     {
         $requestUser = new RequestUpdateUser();
-        $this->validate($requestUser->rules(), $requestUser->messages());
+        $values = $this->validate($requestUser->rules(), $requestUser->messages());
 
-        //dd('donde se hace ');
+        $this->user->update($values);
+
+        $this->user->r_lastname()->update(['lastname' => $values['lastname']]);
+
+        $this->emit('userListUpdate');
+
+        $this->reset();
+
+        //dd($values);
+    }
+    public function updated($label)
+    {
+        $requestUser = new RequestUpdateUser();
+        $this->validateOnly($label, $requestUser->rules(), $requestUser->messages());
+
     }
 }

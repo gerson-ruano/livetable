@@ -8,6 +8,8 @@ class ComponentModal extends Component
 {
 
     public $showModal;
+
+    public $action;
     /**
      * Create a new component instance.
      *
@@ -15,10 +17,12 @@ class ComponentModal extends Component
      *
      * @return void
      */
-    public function __construct(string $showModal)
+    public function __construct(string $showModal, string $action)
     {
         //
         $this->showModal = $showModal;
+
+        $this->action = $action;
     }
 
     /**

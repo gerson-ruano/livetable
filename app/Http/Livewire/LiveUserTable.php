@@ -108,6 +108,11 @@ class LiveUserTable extends Component
 
     public function showModal(User $user)
     {
-        $this->emit('showModal', $user);
+        if($user->name)
+        {
+            $this->emit('showModal', $user);
+        }else{
+            $this->emit('showModalNewUser');
+        }      
     }
 }

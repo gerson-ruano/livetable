@@ -15,7 +15,7 @@ class LiveUserTable extends Component
     public $perPage = 5;
     public $camp = null;
     public $order = null;
-    public $icon = '-circle';
+    public $icon = '-sort';
     public $user_role = '';
     public $showModal = '';
 
@@ -90,7 +90,7 @@ class LiveUserTable extends Component
                 break;
             case 'desc':
                 $this->order = null;
-                $this->icon = '-circle';
+                $this->icon = '-sort';
                 break;
         }
         $this->icon = $this->iconDirection($this->order);
@@ -100,7 +100,7 @@ class LiveUserTable extends Component
     public function iconDirection($sort) //: string
     {
         if(!$sort){
-            return '-circle';
+            return '-sort';
         }
 
         return $sort === 'asc' ? '-arrow-circle-up' : '-arrow-circle-down';

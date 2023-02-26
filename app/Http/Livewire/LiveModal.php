@@ -66,7 +66,7 @@ class LiveModal extends Component
     public function actualizarUsuario()
     {
         $requestUser = new RequestUpdateUser();
-        $values = $this->validate($requestUser->rules(), $requestUser->messages());
+        $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
         $this->user->update($values);
 

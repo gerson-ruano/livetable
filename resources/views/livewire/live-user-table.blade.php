@@ -41,25 +41,25 @@
                             <th scope="col" class="px-6 py-3">
                                 ID
                                 <button wire:click="sortable('id')">
-                                    <span class="fa fa{{$camp === 'id' ? $icon: '-circle'}}"></span>
+                                    <span class="fa fa{{$camp === 'id' ? $icon: '-sort'}}"></span>
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 NOMBRE
                                 <button wire:click="sortable('name')">
-                                    <span class="fa fa{{$camp === 'name' ? $icon: '-circle'}}"></span>
+                                    <span class="fa fa{{$camp === 'name' ? $icon: '-sort'}}"></span>
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 APELLIDO
                                 <button wire:click="sortable('lastname')">
-                                    <span class="fa fa{{$camp === 'lastname' ? $icon: '-circle'}}"></span>
+                                    <span class="fa fa{{$camp === 'lastname' ? $icon: '-sort'}}"></span>
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 EMAIL
                                 <button wire:click="sortable('email')">
-                                    <span class="fa fa{{$camp === 'email' ? $icon: '-circle'}}"></span>
+                                    <span class="fa fa{{$camp === 'email' ? $icon: '-sort'}}"></span>
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -79,8 +79,6 @@
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="pl-3">
                                         {{ $user->id }}
-                                        {{-- <div class="text-base font-semibold">Neil Sims</div>
-                        <div class="font-normal text-gray-500">neil.sims@flowbite.com</div> --}}
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
@@ -90,15 +88,13 @@
                                     {{ $user->r_lastname->lastname }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                                        {{ $user->email }}
-                                    </div>
+                                    {{ $user->email }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="pl-3">
+                                <td class="flex content-center">
+                                        <span class=" pl-2 h-2.5 w-2.5 rounded-full mr-2 
+                                        {{$user->rol === 'Administrador' ? 'bg-gray-400' : 
+                                        ($user->rol === 'Vendedor' ? 'bg-blue-400' : 'bg-green-500')}}"></span>
                                         <div class="text-base font-semibold">{{$user->rol}}</div>
-                                        {{-- <div class="font-normal text-gray-500">neil.sims@flowbite.com</div> --}}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">

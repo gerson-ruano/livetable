@@ -8,10 +8,14 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Apellido;
 use Illuminate\Support\Facades\DB;
-
+use Livewire\WithFileUploads;
+use Livewire\TemporaryUploadedFile;
 
 class LiveModal extends Component
 {
+    use WithFileUploads;
+    //use TemporaryUploadedFile;
+
     public $showModal = 'hidden';
     public $name = '';
     public $lastname = '';
@@ -22,6 +26,7 @@ class LiveModal extends Component
     public $method = '';
     public $password = '';
     public $password_confirmation = '';
+    public $profile_photo_path = null;
 
     protected $listeners  = [
         'showModal' => 'sacarModal',
@@ -68,6 +73,9 @@ class LiveModal extends Component
         $requestUser = new RequestUpdateUser();
         $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
+        $profile = ['profile_photo_path' => $this->loadImage($values['profile_photo_path'])];
+        $values = array_merge($values, $profile);
+        
         $this->user->update($values);
 
         $this->user->r_lastname()->update(['lastname' => $values['lastname']]);
@@ -90,12 +98,14 @@ class LiveModal extends Component
         $requestUser = new RequestUpdateUser();
         $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
 
+        
         $user = new User;
         $apellido = new Apellido;
         $apellido->lastname = $values['lastname'];
         //Password
 
         $user->fill($values);
+        $user->profile_photo_path = $this->loadImage($values['profile_photo_path']);
         $user->password = bcrypt($values['password']);
         DB::transaction(function() use ($user, $apellido){
             $user->save();
@@ -103,5 +113,15 @@ class LiveModal extends Component
         });
      
         $this->cerrarModal();
+    }
+
+    private function loadImage(TemporaryUploadedFile $image)
+    {
+        $extension = $image->getClientOriginalExtension();
+        //$new_name = time().'.'.$extension;
+
+       $location = \Storage::disk('public')->put('img', $image);
+
+       return $location;
     }
 }

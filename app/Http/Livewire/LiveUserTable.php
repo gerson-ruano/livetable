@@ -26,7 +26,8 @@ class LiveUserTable extends Component
     ];
 
     protected $listeners = [
-        'userListUpdate' => 'render'
+        'userListUpdate' => 'render',
+        'deleteUserList' => 'deleteUser'
     ];
 
     public function render()
@@ -115,4 +116,26 @@ class LiveUserTable extends Component
             $this->emit('showModalNewUser');
         }      
     }
+
+    public function deleteUser(User $user)
+    {
+        $user->r_lastname()->delete();
+        $user->delete();
+        $this->emit('deleteUser', $user);
+          
+    }
+
+
+   /* <script>
+    function borrar(user) {
+        if (confirm('Esta seguro de borrar este usuario ?')) {
+            Livewire.emit('deleteUserList', user)
+        } else {
+            alert('Se salvo');
+        }
+    }
+    Livewire.on('deleteUser', (user) => {
+        alert('El usuario ${user.name} se borro correctamante');
+    });
+</script>*/
 }

@@ -48,7 +48,15 @@ class RequestUpdateUser extends FormRequest
     {
         return
         [
-            'name.required' => 'El campo del nombre es obligatorio'
+            'name.required' => 'El campo del nombre es obligatorio',
+            'lastname.required' => 'El campo del apellido es obligatorio',
+            'email.required' => 'El campo del correo electronico es obligatorio',
+            'password.required' => 'El campo de la clave es obligatorio',
+            'password.confirmed' => 'El campo de clave y confirmacion de clave deben coincidir',
+            'profile_photo_path' => 'El campo de la imagen es obligatorio',
+            'profile_photo_path.mimes' => 'El tipo de archivo no es soportado',
+            'role.required' => 'Seleccione un role, es obligatorio'
+    
         ];
     }
 }

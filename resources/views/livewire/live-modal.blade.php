@@ -21,8 +21,14 @@
                         </x-component-input-select>
                     </div>
                     <div class="flex">
-                        <x-component-input placeholder="Ingrese su imagen" name="profile_photo_path" type="file" label="Imagen">
+                        @if ($profile_photo_path)
+                            <img src="{{ asset('storage/' . $user->profile_photo_path) }}" width="100">
+                        @else
+                            <p>No tiene una foto de perfil.</p>
+                        @endif
+                        <x-component-input placeholder="Ingrese su imagen" name="profile_photo_path"  type="file" label="Imagen">
                         </x-component-input>
+                        
                     </div>
                     @if($action == 'Registrar')
                     <div class="flex">

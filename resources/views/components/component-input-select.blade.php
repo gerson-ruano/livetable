@@ -10,6 +10,9 @@
                 @endforeach
             </select>
         </div>
+        @if($errors->has($name))
+        <small class="text-red-600">{{$errors->first($name)}}</small>
+        @endif
     </div>
 </div>
 

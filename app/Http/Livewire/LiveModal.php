@@ -45,6 +45,7 @@ class LiveModal extends Component
         $this->lastname = $user->r_lastname->lastname;
         $this->email = $user->email;
         $this->role = $user->role;
+        $this->profile_photo_path = $user->profile_photo_path;
 
         $this->action = 'Actualizar';
         $this->method = 'actualizarUsuario';
@@ -71,24 +72,38 @@ class LiveModal extends Component
     public function actualizarUsuario()
     {
         $requestUser = new RequestUpdateUser();
-        $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
-
-        $profile = ['profile_photo_path' => $this->loadImage($values['profile_photo_path'])];
-        $values = array_merge($values, $profile);
         
+        $values = $this->validate($requestUser->rules($this->user), $requestUser->messages());
+        //dd($values);
+        
+        $profile = ['profile_photo_path' => $this->loadImage($values['profile_photo_path'])];
+
+        //dd($profile);
+          
+        $profile = ['profile_photo_path' => $this->loadImage($values['profile_photo_path'])];
+           
+
+        $values = array_merge($values, $profile);
+
+        //dd($values);
+
         $this->user->update($values);
 
         $this->user->r_lastname()->update(['lastname' => $values['lastname']]);
 
         $this->emit('userListUpdate');
 
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->reset();
 
         //dd($values);
     }
+
     public function updated($label)
     {
         $requestUser = new RequestUpdateUser();
+
         $this->validateOnly($label, $requestUser->rules($this->user), $requestUser->messages());
 
     }

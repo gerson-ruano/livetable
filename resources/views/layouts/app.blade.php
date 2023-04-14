@@ -15,8 +15,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="sweetalert2.min.js"></script>
-        <link rel="stylesheet" href="sweetalert2.min.css">
+        {{--<script src="sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="sweetalert2.min.css">--}}
 
         <!-- Styles -->
         @livewireStyles

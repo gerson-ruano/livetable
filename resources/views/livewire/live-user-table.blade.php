@@ -75,7 +75,7 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr class="hover:bg-gray-50">
+                                <tr class="hover:bg-gray-100">
                                     <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
                                         <div class="relative h-10 w-10">
                                             {{ $user->id }}
@@ -97,13 +97,13 @@
                                         {{ $user->email }}
                                     </td>
                                     <td class="flex content-center">
-                                        <span
-                                            class=" pl-2 h-2.5 w-2.5 rounded-full mr-2 
+                                        <b><span
+                                            class=" pl-2 h-2.5 w-2.5 rounded-full mr-2
                                         {{ $user->rol === 'Administrador'
                                             ? 'bg-gray-500'
                                             : ($user->rol === 'Vendedor'
                                                 ? 'bg-blue-400'
-                                                : 'bg-green-500') }}"></span>
+                                                : 'bg-green-500') }}"></span></b>
                                         <div class="text-base font-semibold">{{ $user->rol }}</div>
             </div>
             </td>
@@ -154,20 +154,23 @@
                     buttonsStyling: false
                 })
 
-                swalWithBootstrapButtons.fire({
+                Swal.fire({
                     title: 'Desea eliminar el Usuario?',
                     text: "Esta accion ya no podra revertirse!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: ' Eliminar! ',
-                    cancelButtonText: ' Cancelar! ',
-                    reverseButtons: true
+                    //confirmButtonText: ' Eliminar! ',
+                    //cancelButtonText: ' Cancelar! ',
+                    //reverseButtons: true
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Eliminar!'
                 }).then((result) => {
                     if (result.isConfirmed) {
 
                         Livewire.emit('deleteUserList', user)
 
-                        swalWithBootstrapButtons.fire(
+                        Swal.fire(
                             'Eliminado!',
                             'El usuario a sido elimando.',
                             'success'
@@ -176,7 +179,7 @@
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                        swalWithBootstrapButtons.fire(
+                        Swal.fire(
                             'Cancelar',
                             'No se hizo ningun cambio :)',
                             'error'

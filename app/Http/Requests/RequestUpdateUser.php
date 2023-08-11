@@ -41,7 +41,7 @@ class RequestUpdateUser extends FormRequest
             $values = array_merge($values, $validation_password);
         }
 
-        return $values; 
+        return $values;
     }
 
     public function messages()
@@ -51,12 +51,13 @@ class RequestUpdateUser extends FormRequest
             'name.required' => 'El campo del nombre es obligatorio',
             'lastname.required' => 'El campo del apellido es obligatorio',
             'email.required' => 'El campo del correo electronico es obligatorio',
+            'email.unique' => 'El correo electronico ya existe en la base de datos',
             'password.required' => 'El campo de la clave es obligatorio',
             'password.confirmed' => 'El campo de clave y confirmacion de clave deben coincidir',
             'profile_photo_path' => 'El campo de la imagen es obligatorio',
             'profile_photo_path.mimes' => 'El tipo de archivo no es soportado',
             'role.required' => 'Seleccione un role, es obligatorio'
-    
+
         ];
     }
 }
